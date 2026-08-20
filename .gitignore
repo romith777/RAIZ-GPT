@@ -8,8 +8,8 @@ assist_model.pth
 # Ignore original TensorFlow weights
 gpt2/
 
-# Ignore massive datasets
-*.json
+# Ignore massive datasets in the root folder only
+/*.json
 
 # Python cache
 __pycache__/
