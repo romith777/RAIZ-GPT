@@ -142,7 +142,7 @@ function App() {
       const response = await axios.post(`${apiUrl}/chat`, {
         instruction: textToSend
       }, {
-        headers: { "ngrok-skip-browser-warning": "69420" },
+        headers: { "ngrok-skip-browser-warning": "69420" } ,
         signal: abortControllerRef.current.signal
       });
       
