@@ -1,0 +1,22 @@
+# Environment variables
+.env
+
+# Ignore heavy model weights (GitHub blocks files > 100MB)
+*.pth
+assist_model.pth
+
+# Ignore original TensorFlow weights
+gpt2/
+
+# Ignore massive datasets
+*.json
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Node modules (if any frontend stuff is in here)
+node_modules/
+
+# Mac/OSX system files
+.DS_Store
