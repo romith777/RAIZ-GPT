@@ -34,11 +34,16 @@ python assist_test.py
 # You will be prompted to enter an instruction and context.
 ```
 
-**3. Serve Model via API**
-To run the Flask backend for the model (useful for frontend integrations):
+**3. Serve Model via API (Flask)**
+To run the backend server (exposes a REST API on port 7860):
 ```bash
 python app.py
-# Server runs locally and exposes endpoints via Flask/CORS
+```
+Once the server is running, you can query the model's `/chat` endpoint using `curl` from a new terminal:
+```bash
+curl -X POST http://localhost:7860/chat \
+     -H "Content-Type: application/json" \
+     -d '{"instruction": "Explain distributed computing"}'
 ```
 
 **4. Experimental SSM / Mamba Block**
