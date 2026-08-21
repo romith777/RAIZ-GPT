@@ -1,32 +1,42 @@
-# RAIZ-GPT: 355M Parameter Foundation Model
+﻿# RAIZ-GPT: 355M Parameter Foundation Model
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)
-![Deep Learning](https://img.shields.io/badge/Deep_Learning-Architecture-blue?style=for-the-badge)
-![State Space Models](https://img.shields.io/badge/State_Space_Models-Mamba-green?style=for-the-badge)
+![Architecture](https://img.shields.io/badge/Architecture-Transformer_%26_SSM-blue?style=for-the-badge)
 
-RAIZ-GPT is a custom-built, 355M parameter generative language model engineered from scratch using PyTorch. This project focuses on translating deep learning research into a highly capable, low-latency foundation model, featuring robust data tokenization pipelines and experimental integrations with linear-time sequence models.
+RAIZ-GPT is a custom-built, 355M parameter generative language model engineered entirely from scratch using PyTorch. The project was built to deeply understand the mechanics of Large Language Models—from engineering parallelized data tokenization pipelines to implementing low-level forward/backward passes without relying on high-level abstraction libraries.
+
+Currently, the project is actively exploring solutions to the quadratic scaling bottleneck of Multi-Head Attention by integrating experimental **State Space Models (Mamba)** for linear-time sequence processing.
 
 ## 🚀 Key Architectural Features
 
-* **From-Scratch Implementation:** Full control over the model architecture, avoiding high-level wrappers to deeply manipulate tensors, forward passes, and backpropagation logic.
-* **Large-Scale Data Pipeline:** Engineered a highly parallel ETL (Extract, Transform, Load) data processing infrastructure to clean, evaluate, and tokenize over 100,000 unstructured instruction-response datasets.
-* **Experimental SSM (Mamba) Integration:** Explored solutions to the quadratic scaling bottleneck of traditional Multi-Head Attention by implementing and testing a minimal **State Space Model (SSM)** block for linear-time sequence processing.
-* **Low-Latency Inference API:** Designed a highly reliable model serving stack capable of handling real-time AI interactions.
+* **From-Scratch MHA Implementation:** Full mathematical control over the Transformer architecture, including custom multi-head attention mechanisms, layer normalizations, and positional embeddings.
+* **Large-Scale ETL Pipeline:** Engineered a highly parallel data processing infrastructure to clean, evaluate, and tokenize over 100,000 unstructured instruction-response datasets prior to training.
+* **The $O(N^2)$ Bottleneck & SSM Integration:** To address the memory limitations of standard attention for long contexts, this repository includes an active research branch implementing a minimal **State Space Model (SSM)** block to achieve $O(N)$ scaling.
+* **Low-Latency Inference:** Designed a highly reliable model serving stack capable of handling real-time AI interactions.
 
-## 🧠 State Space Model (SSM) Exploration
-To optimize inference speeds and reduce memory footprint, this repository includes \MambaBlock.py\—a custom PyTorch implementation of the Mamba architecture. It utilizes 1D convolutions for local context and continuous state projections to update hidden states linearly, serving as a high-performance alternative to standard Transformer attention mechanisms. A test training script (\	rain_mamba_mini.py\) is also included to demonstrate sequence pattern convergence.
+## 🧠 State Space Model (Mamba) Research
+Traditional Transformers suffer from $O(N^2)$ complexity. To optimize inference speeds, this repository includes `MambaBlock.py`—a custom PyTorch implementation of the Mamba architecture. It utilizes 1D convolutions for local context and continuous state projections to update hidden states linearly, serving as a high-performance alternative to standard attention.
 
-## ⚙️ Tech Stack
-* **Framework:** PyTorch
-* **Backend Serving:** Python, Flask, Node.js
-* **Data Engineering:** Pandas, Custom Tokenizers
+## 🛠️ Installation & Usage
 
-## 🛠️ Usage
-
-\\ash
+**1. Clone and Install Dependencies**
+```bash
 git clone https://github.com/romith777/RAIZ-GPT.git
 cd RAIZ-GPT
-pip install torch transformers pandas
+pip install -r requirements.txt
+```
+
+**2. Standard GPT Inference (Multi-Head Attention)**
+To run the primary 355M parameter model and generate text:
+```bash
+# Example command assuming a generate.py or main inference script exists
+python generate.py --prompt "Explain distributed computing" --max_tokens 150
+```
+
+**3. Experimental SSM / Mamba Block**
+To run the experimental linear-time SSM architecture on a test sequence:
+```bash
+# Trains a mini-Mamba block to prove sequence pattern convergence
 python train_mamba_mini.py
-\
+```
