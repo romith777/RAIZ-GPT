@@ -27,14 +27,21 @@ cd RAIZ-GPT
 pip install -r requirements.txt
 ```
 
-**2. Standard GPT Inference (Multi-Head Attention)**
-To run the primary 355M parameter model and generate text:
+**2. Standard GPT Inference (Interactive CLI)**
+To test the primary 355M parameter model interactively in your terminal:
 ```bash
-# Example command assuming a generate.py or main inference script exists
-python generate.py --prompt "Explain distributed computing" --max_tokens 150
+python assist_test.py
+# You will be prompted to enter an instruction and context.
 ```
 
-**3. Experimental SSM / Mamba Block**
+**3. Serve Model via API**
+To run the Flask backend for the model (useful for frontend integrations):
+```bash
+python app.py
+# Server runs locally and exposes endpoints via Flask/CORS
+```
+
+**4. Experimental SSM / Mamba Block**
 To run the experimental linear-time SSM architecture on a test sequence:
 ```bash
 # Trains a mini-Mamba block to prove sequence pattern convergence
